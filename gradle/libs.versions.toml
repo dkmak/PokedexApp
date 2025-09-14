@@ -15,7 +15,8 @@ appcompat = "1.6.1"
 material = "1.10.0"
 retrofit = "3.0.0"
 okHttp = "5.1.0"
-
+kotlinxSerializationJson = "1.9.0"
+kotlinxImmutable = "0.4.0"
 
 
 [libraries]
@@ -49,13 +50,15 @@ retrofit-bom = { module = "com.squareup.retrofit2:retrofit-bom", version.ref = "
 retrofit = { module = "com.squareup.retrofit2:retrofit" }
 retrofit-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization" }
 okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okHttp" }
-
+kotlinx-immutable-collection = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
 
 # unit test
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+# other stuff
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

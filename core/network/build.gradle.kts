@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.network"
+    namespace = "com.example.network"
     compileSdk = 36
 
     buildFeatures {
