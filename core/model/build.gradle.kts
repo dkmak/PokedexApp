@@ -9,7 +9,6 @@ plugins {
 android {
     namespace = "com.example.model"
     compileSdk = 36
-
 }
 
 dependencies {
