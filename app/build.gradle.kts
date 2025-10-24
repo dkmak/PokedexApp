@@ -36,12 +36,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
+
     buildFeatures {
         compose = true
     }
@@ -53,9 +55,21 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    kotlin {
+        sourceSets.configureEach {
+            kotlin.srcDir(layout.buildDirectory.files("generated/ksp/$name/kotlin/"))
+        }
+        sourceSets.all {
+            languageSettings {
+                languageVersion = "2.0"
+            }
+        }
+    }
 }
 
 dependencies {
+    api(project(":feature:home"))
     implementation(libs.androidx.core)
 
     // compose
