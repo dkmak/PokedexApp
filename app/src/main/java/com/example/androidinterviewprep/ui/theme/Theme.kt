@@ -13,16 +13,18 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.colorResource
 import androidx.core.view.WindowCompat
+import com.example.androidinterviewprep.R
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
+    primary = Green,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = Green,
     secondary = PurpleGrey40,
     tertiary = Pink40
 
@@ -41,7 +43,7 @@ private val LightColorScheme = lightColorScheme(
 fun AndroidInterviewPrepTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

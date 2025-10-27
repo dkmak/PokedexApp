@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.SharingStarted
 class HomeViewModel @Inject constructor(
     val homeRepository: HomeRepository
 ): ViewModel(){
-
     private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
 
     @OptIn(ExperimentalCoroutinesApi::class)
