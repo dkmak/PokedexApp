@@ -47,7 +47,6 @@ android {
 dependencies {
     implementation(project(":core:common-ui"))
     implementation(project(":core:data"))
-    implementation(project(":core:database"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.viewModelCompose)

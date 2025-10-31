@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class Pokemon(
+  var page: Int = 0,
   @SerialName("name")
   val name: String,
 
