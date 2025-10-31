@@ -17,7 +17,6 @@ class PokedexClient @Inject constructor(
 
     suspend fun fetchPokemonInfo(name: String){}
 
-    // when to use a companion object?
     companion object {
         private const val PAGING_SIZE = 20
     }

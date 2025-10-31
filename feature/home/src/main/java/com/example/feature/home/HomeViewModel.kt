@@ -27,4 +27,8 @@ class HomeViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000), // what is this
         initialValue = emptyList(),
     )
+
+    fun fetchNextPokemonList() {
+        pokemonFetchingIndex.value++
+    }
 }

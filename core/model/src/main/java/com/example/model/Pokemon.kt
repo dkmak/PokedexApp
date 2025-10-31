@@ -1,9 +1,12 @@
 package com.example.model
 
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Parcelize
 @Serializable
 data class Pokemon(
   @SerialName("name")
@@ -11,4 +14,4 @@ data class Pokemon(
 
   @SerialName("url")
   val url: String
-)
+): Parcelable
