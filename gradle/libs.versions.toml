@@ -16,6 +16,8 @@ okHttp = "4.12.0"
 kotlinxSerializationJson = "1.7.1"
 kotlinxImmutable = "0.4.0"
 androidxHiltNavigationCompose = "1.2.0"
+appcompat = "1.7.1"
+material = "1.13.0"
 
 
 
@@ -58,6 +60,8 @@ junit = { module = "junit:junit", version.ref = "junit" }
 
 # other stuff
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

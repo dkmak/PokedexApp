@@ -25,8 +25,12 @@ fun Home(
     val pokemonList by homeViewModel.pokemonList.collectAsStateWithLifecycle()
 
     Scaffold(
-        topBar = { TopAppBar(title = {Text("Pokedex Home")}) }
-    ){ paddingValues ->
+        topBar = {
+            TopAppBar(
+                title = { Text("Pokedex Home") },
+            )
+        }
+    ) { paddingValues ->
         LazyColumn(
             modifier = Modifier.padding(paddingValues)
         ) {
@@ -34,7 +38,7 @@ fun Home(
                 Box(
                     Modifier
                         .padding(16.dp)
-                ){
+                ) {
                     Text(
                         text = pokemon.name
                     )

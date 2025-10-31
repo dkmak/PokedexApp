@@ -45,8 +45,8 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(project(":core:data")) // I want to build this as deps
+    implementation(project(":core:common-ui"))
+    implementation(project(":core:data"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.viewModelCompose)
