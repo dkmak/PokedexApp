@@ -8,15 +8,17 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import com.example.model.Pokemon
 import com.example.network.service.PokedexClient
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.Dispatcher
 import kotlin.collections.emptyList
 
 class HomeRepositoryImpl @Inject constructor(
     private val pokedexClient: PokedexClient,
-    private val pokemonDao: PokemonDao
-    // inject the dispatcher
+    private val pokemonDao: PokemonDao,
+    private val ioDispatcher: CoroutineDispatcher
 ): HomeRepository {
     override fun fetchPokemonList(page: Int): Flow<List<Pokemon>> = flow {
         var pagedPokemonList = pokemonDao.getPokemonList(page).asDomain()
@@ -41,5 +43,5 @@ class HomeRepositoryImpl @Inject constructor(
         } else {
             emit(pokemonDao.getAllPokemonList(page).asDomain())
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(ioDispatcher)
 }
