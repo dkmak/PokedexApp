@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity
 data class PokemonEntity(
     @PrimaryKey val name: String,
-    var page: Int, // why is this a var
+    var page: Int,
     val url: String
 )

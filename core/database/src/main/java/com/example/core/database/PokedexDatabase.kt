@@ -8,7 +8,7 @@ import com.example.core.database.entity.PokemonEntity
 
 @Database(
     entities = [PokemonEntity::class],
-    version = 4,
+    version = 1,
     exportSchema = true
 )
 abstract class PokedexDatabase : RoomDatabase() {
