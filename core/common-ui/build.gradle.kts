@@ -25,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -46,6 +46,8 @@ dependencies {
     api(libs.androidx.compose.ui.tooling)
     api(libs.androidx.compose.ui.tooling.preview)
     api(libs.androidx.compose.material3)
+    api(libs.coil.compose)
+    api(libs.androidx.compose.material.icons.extended)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)

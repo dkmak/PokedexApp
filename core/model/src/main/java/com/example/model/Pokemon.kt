@@ -21,4 +21,12 @@ data class Pokemon(
 
     val pokedexIndex: String
         get() = url.split("/".toRegex()).dropLast(1).last()
+
+    val spriteUrl: String
+        inline get() = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/" +
+                "pokemon/${pokedexIndex}.png"
+
+    val animatedUrl: String
+        get() = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+                "versions/generation-v/black-white/animated/${pokedexIndex}.gif"
 }
