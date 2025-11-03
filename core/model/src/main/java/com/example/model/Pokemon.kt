@@ -20,7 +20,7 @@ data class Pokemon(
         get() = nameField.replaceFirstChar { it.uppercase() }
 
     val pokedexIndex: Int
-        get() = url.split("/".toRegex()).dropLast(1).last().toInt()
+        get() = url.split("/".toRegex()).dropLast(1).lastOrNull()?.toIntOrNull()?: 0
 
     val spriteUrl: String
         inline get() = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/" +

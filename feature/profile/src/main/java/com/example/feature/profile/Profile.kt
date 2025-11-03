@@ -28,7 +28,7 @@ fun Profile(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(R.string.profile_title) + "" +pokemonInfo.name ) },
+                title = { Text(text = stringResource(R.string.profile_title) + "#"+pokemonInfo.pokedexIndex + " " +pokemonInfo.name ) },
                 colors = TopAppBarDefaults.topAppBarColors().copy(
                     containerColor = Green
                 ),

@@ -19,29 +19,18 @@ class HomeRepositoryImpl @Inject constructor(
     private val pokedexClient: PokedexClient,
     private val pokemonDao: PokemonDao,
     private val ioDispatcher: CoroutineDispatcher
-): HomeRepository {
+) : HomeRepository {
     override fun fetchPokemonList(page: Int): Flow<List<Pokemon>> = flow {
-        var pagedPokemonList = pokemonDao.getPokemonList(page).asDomain()
+        try {
+            val response = pokedexClient.fetchPokemonList(page = page)
+            val networkPokemon = response.results.map { it.copy(page = page) }
+            
+            pokemonDao.insertPokemonList(networkPokemon.asEntity())
 
-        if (pagedPokemonList.isEmpty()){
-            try {
-                val response = pokedexClient.fetchPokemonList(page = page)
-                Log.d("HomeRepository", "fetchPokemonList: ${response}")
-
-                pagedPokemonList = response.results
-                pagedPokemonList.forEach{ pokemon ->
-                    pokemon.page = page
-                }
-                pokemonDao.insertPokemonList(pagedPokemonList.asEntity())
-
-                emit(pokemonDao.getPokemonList(page).asDomain())
-            } catch (e: Exception){
-
-                Log.d("HomeRepository", "fetchPokemonList: ${e.message}")
-                emit(emptyList())
-            }
-        } else {
-            emit(pokemonDao.getPokemonList(page).asDomain())
+        } catch (e: Exception) {
+            Log.d("HomeRepository", "Network fetch for page $page failed: ${e.message}")
         }
+
+        emit(pokemonDao.getAllPokemonList(page).asDomain())
     }.flowOn(ioDispatcher)
 }
