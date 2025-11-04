@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Parcelize
 @Serializable
 data class Pokemon(
     var page: Int = 0,
@@ -14,7 +13,7 @@ data class Pokemon(
     val nameField: String,
     @SerialName("url")
     val url: String
-) : Parcelable { // figure out how this fits in, and why this needs a getter
+) {
 
     val name: String
         get() = nameField.replaceFirstChar { it.uppercase() }
@@ -27,6 +26,6 @@ data class Pokemon(
                 "pokemon/${pokedexIndex}.png"
 
     val animatedUrl: String
-        get() = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+        inline get() = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
                 "versions/generation-v/black-white/animated/${pokedexIndex}.gif"
 }

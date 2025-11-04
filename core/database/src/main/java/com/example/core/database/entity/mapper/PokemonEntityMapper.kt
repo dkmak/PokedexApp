@@ -10,7 +10,7 @@ fun Pokemon.asEntity(): PokemonEntity {
     return PokemonEntity(
         pokedexIndex = this.pokedexIndex,
         page = this.page,
-        name = this.nameField, // Use nameField as it holds the raw name
+        name = this.nameField,
         url = this.url
     )
 }
@@ -21,7 +21,7 @@ fun Pokemon.asEntity(): PokemonEntity {
 fun PokemonEntity.asDomain(): Pokemon {
     return Pokemon(
         page = this.page,
-        nameField = this.name, // The entity's `name` maps back to `nameField`
+        nameField = this.name,
         url = this.url
     )
 }
@@ -30,7 +30,7 @@ fun PokemonEntity.asDomain(): Pokemon {
  * Converts a list of domain models to a list of database entities.
  */
 fun List<Pokemon>.asEntity(): List<PokemonEntity> {
-    return this.map { it.asEntity() } // Reuses the single-object mapper
+    return this.map { it.asEntity() }
 }
 
 /**
@@ -38,5 +38,5 @@ fun List<Pokemon>.asEntity(): List<PokemonEntity> {
  * Handles null lists gracefully by converting them to an empty list.
  */
 fun List<PokemonEntity>?.asDomain(): List<Pokemon> {
-    return this.orEmpty().map { it.asDomain() } // Reuses the single-object mapper
+    return this.orEmpty().map { it.asDomain() }
 }

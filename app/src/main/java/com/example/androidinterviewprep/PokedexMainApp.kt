@@ -18,7 +18,6 @@ import com.example.feature.profile.Profile
 fun PokedexMainApp() {
 
     AndroidInterviewPrepTheme {
-        // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
@@ -41,11 +40,7 @@ fun PokedexMainApp() {
                     route = PokedexNavigationRoute.Profile.route,
                     arguments = PokedexNavigationRoute.Profile.arguments
                 ) { navBackStackEntry ->
-                    // error handle 0
-                    //val pokemonId = navBackStackEntry.arguments?.getInt(POKEMON_ID_ARG) ?: 0
-
                     Profile(
-                        // pokemonIndex = pokemonId,
                         onBackClicked = {
                             navController.popBackStack()
                         }
