@@ -8,6 +8,7 @@ to the profile page and pulls that individual Pokemon's information from the loc
 
 More Information About Pokemon API
 https://pokeapi.co/
+
 https://pokeapi.co/docs/v2#resource-listspagination-section
 
 ### Design Overview
