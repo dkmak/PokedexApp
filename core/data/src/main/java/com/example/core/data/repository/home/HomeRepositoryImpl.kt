@@ -10,8 +10,10 @@ import com.example.model.Pokemon
 import com.example.network.service.PokedexClient
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import okhttp3.Dispatcher
 import kotlin.collections.emptyList
 
@@ -20,17 +22,22 @@ class HomeRepositoryImpl @Inject constructor(
     private val pokemonDao: PokemonDao,
     private val ioDispatcher: CoroutineDispatcher
 ) : HomeRepository {
-    override fun fetchPokemonList(page: Int): Flow<List<Pokemon>> = flow {
-        try {
-            val response = pokedexClient.fetchPokemonList(page = page)
-            val networkPokemon = response.results.map { it.copy(page = page) }
+    override fun fetchPokemonList(page: Int): Flow<Result<List<Pokemon>>> = flow {
+        val response = pokedexClient.fetchPokemonList(page = page)
 
-            pokemonDao.insertPokemonList(networkPokemon.asEntity())
+        val networkPokemon = response.results.map { it.copy(page = page) }
+        pokemonDao.insertPokemonList(networkPokemon.asEntity())
 
-        } catch (e: Exception) {
-            Log.d("HomeRepository", "Network fetch for page $page failed: ${e.message}")
-        }
+        val cachedPokemon = pokemonDao.getAllPokemonList(page).asDomain()
+        emit(cachedPokemon)
 
-        emit(pokemonDao.getAllPokemonList(page).asDomain())
+    }.map { pokemonList ->
+        Result.success(pokemonList)
+    }.catch { throwable ->
+        Log.d("HomeRepository", "Network fetch for page $page failed: ${throwable.message}")
+
+        val cachedPokemon = pokemonDao.getAllPokemonList(page).asDomain()
+        // I could also emit a failure and bubble that up
+        emit(Result.success(cachedPokemon))
     }.flowOn(ioDispatcher)
 }
