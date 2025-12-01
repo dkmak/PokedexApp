@@ -43,10 +43,20 @@ fun HomeContent(
         modifier = modifier,
         state = listState
     ) {
-        items(pokemonList) { pokemon ->
+        items(pokemonList,
+            key = {pokemon -> pokemon.pokedexIndex}
+        ) { pokemon ->
+            /*
+            * If we did
+            * onPokemonClicked = { onPokemonClicked(pokemon.pokedexIndex) }
+            * a new lambda instance is created, which can trigger recomposition
+            * Instead, pass the index inside PokemonListItem, and create the lambda there
+            * to avoid unnecessary recomposition
+            * */
             PokemonListItem(
                 pokemon,
-                onPokemonClicked = { onPokemonClicked(pokemon.pokedexIndex) }
+                onPokemonClicked = onPokemonClicked,
+                pokemonIndex = pokemon.pokedexIndex
             )
         }
 
@@ -68,12 +78,16 @@ fun HomeContent(
 @Composable
 fun PokemonListItem(
     pokemon: Pokemon,
-    onPokemonClicked: () -> Unit
+    onPokemonClicked: (Int) -> Unit,
+    pokemonIndex: Int
 ) {
     Row(
         modifier = Modifier
             .padding(16.dp)
     ) {
+        /* Construct the final lambda inside its own clickable modifier.
+         This makes the lambda passed from the parent more stable, and reduces recomposition
+         */
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -82,7 +96,7 @@ fun PokemonListItem(
                     shape = RoundedCornerShape(16.dp)
 
                 )
-                .clickable(onClick = onPokemonClicked)
+                .clickable { onPokemonClicked(pokemonIndex) }
         ) {
             Row(
                 modifier = Modifier

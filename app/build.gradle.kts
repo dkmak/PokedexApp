@@ -59,6 +59,7 @@ dependencies {
     implementation(project(":core:common-ui"))
 
     implementation(libs.androidx.core)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(libs.androidx.hilt.navigation.compose)
 

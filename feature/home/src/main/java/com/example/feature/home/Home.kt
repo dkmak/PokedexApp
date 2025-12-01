@@ -28,7 +28,6 @@ fun Home(
 
     val pokemonList by homeViewModel.pokemonList.collectAsStateWithLifecycle()
     val isLoading by homeViewModel.isLoading.collectAsStateWithLifecycle()
-
     val listState = rememberLazyListState()
 
     Scaffold(

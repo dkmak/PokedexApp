@@ -34,10 +34,12 @@ class HomeRepositoryImpl @Inject constructor(
     }.map { pokemonList ->
         Result.success(pokemonList)
     }.catch { throwable ->
-        Log.d("HomeRepository", "Network fetch for page $page failed: ${throwable.message}")
+        // could also be a database failure
+        Log.d("HomeRepository", "fetch for page $page failed: ${throwable.message}")
 
         val cachedPokemon = pokemonDao.getAllPokemonList(page).asDomain()
         // I could also emit a failure and bubble that up
         emit(Result.success(cachedPokemon))
     }.flowOn(ioDispatcher)
+
 }

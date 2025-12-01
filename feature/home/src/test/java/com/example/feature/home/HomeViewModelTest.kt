@@ -40,7 +40,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `pokemonList state emits data from repository`() = runTest {
+    fun `pokemonList state emits data from repository`() = runTest(testDispatcher) {
         coEvery { homeRepository.fetchPokemonList(any()) } returns flowOf(
             Result.success(listOf(Pokemon(nameField = "Bulbasaur", url = "url/1/")))
         )

@@ -17,22 +17,24 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     val homeRepository: HomeRepository
-): ViewModel(){
+) : ViewModel() {
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     private val _error: MutableStateFlow<String?> = MutableStateFlow(null)
+
     // you can add this to the UI
     val error: StateFlow<String?> = _error.asStateFlow()
 
     private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val pokemonList: StateFlow<List<Pokemon>> = pokemonFetchingIndex.flatMapLatest { page->
+    val pokemonList: StateFlow<List<Pokemon>> = pokemonFetchingIndex.flatMapLatest { page ->
         homeRepository.fetchPokemonList(page = page)
             .onStart {
                 _isLoading.value = true
@@ -49,6 +51,43 @@ class HomeViewModel @Inject constructor(
         initialValue = emptyList()
     )
 
+    // without relying on a changing fetching index
+    val pokemonList2 = homeRepository.fetchPokemonList(pokemonFetchingIndex.value)
+        .onStart { _isLoading.value = true }
+        .map { result ->
+            result.getOrThrow()
+        }.catch { throwable ->
+            _error.value = throwable.message ?: "error found retrieving pokemon list"
+            emit(pokemonList.value)
+        }.onCompletion { _isLoading.value = false }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(TIMER.toLong()),
+            initialValue = emptyList()
+        )
+
+
+    // if we were to trigger this directly from the API
+    fun fetchPokemonList(){
+        pokemonFetchingIndex.value++
+        homeRepository.fetchPokemonList(pokemonFetchingIndex.value)
+            .onStart {
+                _isLoading.value = true
+            }
+            .map { result -> result.getOrThrow() }
+            .catch { throwable ->
+                _error.value = throwable.message ?: "error found retrieving pokemon list"
+                emit(pokemonList.value)
+            }
+            .onCompletion { _isLoading.value = true }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(TIMER.toLong()),
+                initialValue = emptyList<List<Pokemon>>()
+            )
+    }
+
+
     fun fetchNextPokemonList() {
         pokemonFetchingIndex.value++
     }
@@ -60,7 +99,7 @@ class HomeViewModel @Inject constructor(
 
 // implement later
 sealed interface HomeUIState {
-    data object Loading: HomeUIState
-    data class Error(val message: String): HomeUIState
-    data object Idle: HomeUIState
+    data object Loading : HomeUIState
+    data class Error(val message: String) : HomeUIState
+    data object Idle : HomeUIState
 }
