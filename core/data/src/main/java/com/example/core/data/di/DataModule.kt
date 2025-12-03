@@ -9,12 +9,16 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
+/*
+@Bind should use a abstract class, not an interface.
+ Because it is just an instruction to the compiler, it's flexible
+ */
 @Module
 @InstallIn(SingletonComponent::class) // creates a single reference that will be injected throughout the lifetime(?) of the application
-internal interface DataModule { // why internal?
+internal abstract class DataModule { // why internal?
     @Binds
-    fun bindHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
+    abstract fun bindHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
 
     @Binds
-    fun bindProfileRepository(profileRepositoryImpl: ProfileRepositoryImpl): ProfileRepository
+    abstract fun bindProfileRepository(profileRepositoryImpl: ProfileRepositoryImpl): ProfileRepository
 }

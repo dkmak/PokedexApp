@@ -16,7 +16,6 @@ import com.example.feature.profile.Profile
 
 @Composable
 fun PokedexMainApp() {
-
     AndroidInterviewPrepTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -28,7 +27,8 @@ fun PokedexMainApp() {
                 navController = navController,
                 startDestination = PokedexNavigationRoute.Home.route
             ) {
-                composable(route = PokedexNavigationRoute.Home.route) {
+                // Add a Composable to the NavGraphBuilder
+                composable(route = PokedexNavigationRoute.Home.route) { navBackStackEntry ->
                     Home(
                         onPokemonClicked = { pokemonId ->
                             navController.navigate(PokedexNavigationRoute.Profile.createRoute(pokemonId))

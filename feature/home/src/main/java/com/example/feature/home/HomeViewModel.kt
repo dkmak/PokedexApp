@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
 
     private val _error: MutableStateFlow<String?> = MutableStateFlow(null)
 
-    // you can add this to the UI
+    // you can add this to the UI, maybe as a snackbar or toast
     val error: StateFlow<String?> = _error.asStateFlow()
 
     private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)

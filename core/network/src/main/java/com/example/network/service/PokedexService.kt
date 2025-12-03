@@ -1,6 +1,7 @@
 package com.example.network.service
 
 import com.example.network.model.PokemonResponse
+import kotlinx.serialization.InternalSerializationApi
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
