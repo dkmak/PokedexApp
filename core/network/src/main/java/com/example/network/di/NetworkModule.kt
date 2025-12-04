@@ -1,5 +1,6 @@
 package com.example.network.di
 
+import com.example.network.BuildConfig
 import com.example.network.service.PokedexService
 import com.example.network.service.PokedexClient
 import dagger.Module
@@ -14,8 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
 import kotlinx.serialization.json.Json
+import okhttp3.logging.HttpLoggingInterceptor
 
-// @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
 @Module
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
@@ -30,8 +31,19 @@ internal object NetworkModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .apply {
+                if (BuildConfig.DEBUG) {
+                    this.addNetworkInterceptor(
+                        HttpLoggingInterceptor().apply {
+                            level = HttpLoggingInterceptor.Level.BODY
+                        },
+                    )
+                }
+            }
             .build()
     }
+
+
 
     @Provides
     @Singleton

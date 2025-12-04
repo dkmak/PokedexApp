@@ -32,6 +32,7 @@ dependencies {
     // This is the Retrofit converter for serialization
     implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp.logging)
 
     // dependency injection
     implementation(libs.hilt.android)
