@@ -40,6 +40,6 @@ class HomeRepositoryImpl @Inject constructor(
         val cachedPokemon = pokemonDao.getAllPokemonList(page).asDomain()
         // I could also emit a failure and bubble that up
         emit(Result.success(cachedPokemon))
-    }.flowOn(ioDispatcher)
+    }.flowOn(ioDispatcher) // this last line is only necessary bc of the addition of DB
 
 }

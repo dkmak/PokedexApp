@@ -1,4 +1,4 @@
-package com.example.androidinterviewprep
+package com.example.pokedexapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,7 +12,7 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.androidinterviewprep", appContext.packageName)
+        assertEquals("com.example.pokedexapp", appContext.packageName)
     }
 
     // best to put E2E tests here for navigation, etc.

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidInterviewPrep</string>
+    <string name="app_name">PokedexApp</string>
     <string name="home_title">Pokemon!</string>
     <string name="profile_title">Profile:</string>
     <string name="back">Back</string>

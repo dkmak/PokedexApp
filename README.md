@@ -1,4 +1,4 @@
-# Android Interview Sample App
+# Pokedex App
 
 ## App
 An Android application utilizing the public Pokedex API (https://pokedexapi.com/) to display Pokemon as a list.

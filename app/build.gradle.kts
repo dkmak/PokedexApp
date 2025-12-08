@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.androidinterviewprep"
+    namespace = "com.example.pokedexapp"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.androidinterviewprep"
+        applicationId = "com.example.pokedexapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.example.androidinterviewprep
+package com.example.pokedexapp
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -9,14 +9,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-import com.example.androidinterviewprep.navigation.PokedexNavigationRoute
-import com.example.core.common.ui.theme.AndroidInterviewPrepTheme
+import com.example.pokedexapp.navigation.PokedexNavigationRoute
+import com.example.core.common.ui.theme.PokedexAppTheme
 import com.example.feature.home.Home
 import com.example.feature.profile.Profile
 
 @Composable
 fun PokedexMainApp() {
-    AndroidInterviewPrepTheme {
+    PokedexAppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

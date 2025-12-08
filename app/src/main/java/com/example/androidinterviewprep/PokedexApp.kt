@@ -1,7 +1,7 @@
-package com.example.androidinterviewprep
+package com.example.pokedexapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class AndroidInterviewPrep : Application()
+class PokedexApp : Application()
